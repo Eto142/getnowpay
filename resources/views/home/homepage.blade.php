@@ -969,8 +969,9 @@
           <li class="nav-item"><a class="nav-link" href="#">SUPPORT</a></li>
         </ul>
         <div class="d-flex">
-          <button class="btn btn-login">LOG IN</button>
-          <button class="btn btn-signup">SIGN UP</button>
+           <a href="{{ url('register') }}" class="btn btn-login">LOG IN</a>
+              <a href="{{ route('login') }}" class="btn btn-signup">SIGN UP</a>
+         
         </div>
       </div>
     </div>
