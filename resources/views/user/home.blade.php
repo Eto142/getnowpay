@@ -1,5 +1,5 @@
 @include('user.header')
-        <!-- Content -->
+ <!-- Content -->
 <div class="content">
     <h1 class="dashboard-title">Dashboard</h1>
     <p class="dashboard-subtitle">In this section, you will be able to find your account's statistics. Now get ready to start with your integration!</p>
@@ -14,14 +14,12 @@
                 <div class="balance-card crypto">
                     <div class="balance-header">
                         <span class="balance-label">Crypto Balance</span>
-                        <select class="balance-action">
-                            <option>Convert</option>
-                            <option>To USD</option>
-                            <option>To EUR</option>
-                        </select>
+                        <button class="balance-action" data-bs-toggle="modal" data-bs-target="#convertModal">
+                            Convert
+                        </button>
                     </div>
-                    <div class="balance-amount">0.5423 BTC</div>
-                    <p class="balance-note">≈ $15,200.00</p>
+                    <div class="balance-amount">0 BTC</div>
+                    <p class="balance-note">≈ $0.00</p>
                 </div>
 
                 <!-- Fiat Balance -->
@@ -35,7 +33,7 @@
                             <option>CashApp</option>
                         </select>
                     </div>
-                    <div class="balance-amount">$5,800.00</div>
+                    <div class="balance-amount">$0.00</div>
                     <p class="balance-note">Available for withdrawal</p>
                 </div>
             </div>
@@ -95,6 +93,53 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Conversion Modal -->
+<div class="modal fade" id="convertModal" tabindex="-1" aria-labelledby="convertModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="convertModalLabel">Convert Crypto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <!-- From Crypto -->
+          <div class="mb-3">
+            <label for="fromCrypto" class="form-label">From</label>
+            <select class="form-select" id="fromCrypto">
+              <option selected>BTC</option>
+              <option>ETH</option>
+              <option>LTC</option>
+              <option>XRP</option>
+            </select>
+          </div>
+
+          <!-- To Currency -->
+          <div class="mb-3">
+            <label for="toCurrency" class="form-label">To</label>
+            <select class="form-select" id="toCurrency">
+              <option selected>USD</option>
+              <option>EUR</option>
+              <option>NGN</option>
+              <option>BTC</option>
+              <option>ETH</option>
+            </select>
+          </div>
+
+          <!-- Amount -->
+          <div class="mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="amount" placeholder="Enter amount">
+          </div>
+
+          <!-- Confirm Button -->
+          <button type="submit" class="btn btn-primary w-100">Confirm Conversion</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 
