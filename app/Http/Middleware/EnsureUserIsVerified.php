@@ -13,9 +13,9 @@ class EnsureUserIsVerified
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-   public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->check() && !auth()->user()->is_verified){
+        if (auth()->check() && auth()->user()->verified !== 1) {
             return redirect()->route('access.code')
                 ->with('error', 'You must verify your access code first.');
         }
@@ -23,4 +23,3 @@ class EnsureUserIsVerified
         return $next($request);
     }
 }
-

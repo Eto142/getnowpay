@@ -26,7 +26,7 @@ class User extends Authenticatable
         'form_1099',
         'password',
         'access_code',
-        'is_verified'
+        'verified'
     ];
 
     /**
