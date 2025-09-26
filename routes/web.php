@@ -7,7 +7,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AccessCodeController;
 use App\Http\Controllers\User\DashboardController;
 
-Route::get('/', function () {
+Route::get('', function () {
+    return view('home.homepage');
+});
+
+Route::get('crypto/2025/secure-online/payment', function () {
     return view('home.homepage');
 });
 

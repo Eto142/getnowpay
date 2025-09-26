@@ -434,7 +434,7 @@
         </nav>
         
         <div class="sidebar-footer">
-            <a href="mailto:support@GetNowPay.io">support@GetNowPay.io</a>
+            <a href="mailto:support@getnowpay.online">support@getnowpay.online</a>
             <div class="copyright">2025 © GetNowPay</div>
         </div>
     </div>
@@ -484,7 +484,7 @@
         </a>
 
         <!-- Support -->
-        <a href="mailto:support@GetNowPay.io" class="drawer-item">
+        <a href="mailto:support@getnowpay.online" class="drawer-item">
             <i class="fas fa-headset"></i> Support
         </a>
 
