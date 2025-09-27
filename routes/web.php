@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AccessCodeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\AccessCodeController;
+use App\Http\Controllers\User\ConversionController;
 use App\Http\Controllers\User\DashboardController;
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('', function () {
     return view('home.homepage');
@@ -42,7 +44,10 @@ Route::post('/access-code', [AccessCodeController::class, 'verify'])->name('acce
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+Route::post('/conversion', [ConversionController::class, 'store'])->name('conversion.store');
+Route::get('/gas-billing', [DashboardController::class, 'gasBilling'])->name('gas-billing');
+
 });
 
 // Route::prefix('user')

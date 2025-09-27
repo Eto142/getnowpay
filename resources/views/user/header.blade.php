@@ -386,51 +386,24 @@
                     Payments History
                 </a>
             </div>
+
             <div class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="fas fa-th-large"></i>
-                    Payment Solutions
-                    <i class="fas fa-chevron-down ms-auto"></i>
+                     <i class="fas fa-cog"></i>
+                 
+                   Settings
                 </a>
             </div>
-            <div class="nav-item">
+
+             <div class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="fas fa-users"></i>
-                    Customers
-                    <span class="badge">Beta</span>
+                    <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-shield-alt"></i>
-                    Custody
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-money-bill-wave"></i>
-                    Mass Payouts
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-handshake"></i>
-                    Affiliate Program
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-cog"></i>
-                    Settings
-                    <i class="fas fa-chevron-down ms-auto"></i>
-                </a>
-            </div>
-            <div class="nav-item mt-4">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-book"></i>
-                    API Docs
-                </a>
-            </div>
+            
+           
+          
+            
         </nav>
         
         <div class="sidebar-footer">

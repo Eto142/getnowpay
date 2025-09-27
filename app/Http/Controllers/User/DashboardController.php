@@ -24,32 +24,14 @@ class DashboardController extends Controller
 
 }
 
- public function ConnectEscrow() 
- {
+ public function gasBilling()
+    {
+      $conversion = session('conversion'); // get the data from session
+    return view('user.gas-billing', compact('conversion'));  
+     
+    }
 
-   return view('user.connect-escrow');
-}
-
-public function EscrowWalletVerification(){
-
-  return view('user.escrowwallet-verification');
-}
-
-
-public function TransactionAgreement(){
-
-  return view('user.transaction-agreement');
-}
-
-
-
-// public function PayOption(){
  
-//   $escrow = Escrow::where('user_id', Auth::id())->first();
-//     return view('user.pay-option', compact('escrow'));
-  
-// }
-
 
 public function PayOption()
 {

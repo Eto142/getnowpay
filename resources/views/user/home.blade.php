@@ -25,12 +25,10 @@
                 <!-- Fiat Balance -->
                 <div class="balance-card fiat">
                     <div class="balance-header">
-                        <span class="balance-label">Fiat Balance (USD)</span>
+                        <span class="balance-label">Fiat Balance</span>
                         <select class="balance-action">
                             <option>Withdraw</option>
-                            <option>Bank Transfer</option>
-                            <option>Crypto Wallet</option>
-                            <option>CashApp</option>
+
                         </select>
                     </div>
                     <div class="balance-amount">$0.00</div>
@@ -104,39 +102,38 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <form>
-          <!-- From Crypto -->
-          <div class="mb-3">
-            <label for="fromCrypto" class="form-label">From</label>
-            <select class="form-select" id="fromCrypto">
-              <option selected>BTC</option>
-              <option>ETH</option>
-              <option>LTC</option>
-              <option>XRP</option>
-            </select>
-          </div>
+     <form action="{{ route('conversion.store') }}" method="POST">
+    @csrf
+    <!-- From Crypto -->
+    <div class="mb-3">
+        <label for="fromCrypto" class="form-label">From</label>
+        <select class="form-select" id="fromCrypto" name="fromCrypto" required>
+            <option value="BTC" selected>BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="LTC">LTC</option>
+            <option value="XRP">XRP</option>
+        </select>
+    </div>
 
-          <!-- To Currency -->
-          <div class="mb-3">
-            <label for="toCurrency" class="form-label">To</label>
-            <select class="form-select" id="toCurrency">
-              <option selected>USD</option>
-              <option>EUR</option>
-              <option>NGN</option>
-              <option>BTC</option>
-              <option>ETH</option>
-            </select>
-          </div>
+    <!-- To Currency -->
+    <div class="mb-3">
+        <label for="toCurrency" class="form-label">To</label>
+        <select class="form-select" id="toCurrency" name="toCurrency" required>
+            <option value="USD" selected>USD</option>
+            <option value="EUR">EUR</option>
+        </select>
+    </div>
 
-          <!-- Amount -->
-          <div class="mb-3">
-            <label for="amount" class="form-label">Amount</label>
-            <input type="number" class="form-control" id="amount" placeholder="Enter amount">
-          </div>
+    <!-- Amount -->
+    <div class="mb-3">
+        <label for="amount" class="form-label">Amount</label>
+        <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount" required>
+    </div>
 
-          <!-- Confirm Button -->
-          <button type="submit" class="btn btn-primary w-100">Confirm Conversion</button>
-        </form>
+    <!-- Confirm Button -->
+    <button type="submit" class="btn btn-primary w-100">Confirm Conversion</button>
+</form>
+
       </div>
     </div>
   </div>
