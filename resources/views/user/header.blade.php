@@ -375,20 +375,29 @@
         
         <nav class="sidebar-nav">
             <div class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="{{ route('home') }}" class="nav-link active">
                     <i class="fas fa-home"></i>
                     Dashboard
                 </a>
             </div>
+
             <div class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('withdraw') }}" class="nav-link">
+                    <i class="fas fa-money-bill-wave"></i>
+                    Withdrawal
+                </a>
+            </div>
+
+
+            <div class="nav-item">
+                <a href="{{ route('payment.history') }}" class="nav-link">
                     <i class="fas fa-history"></i>
                     Payments History
                 </a>
             </div>
 
             <div class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('settings.index') }}" class="nav-link">
                      <i class="fas fa-cog"></i>
                  
                    Settings
@@ -396,7 +405,7 @@
             </div>
 
              <div class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('user.logout') }}" class="nav-link">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </div>
@@ -433,11 +442,10 @@
 
     <div></div>
     <div class="user-info" id="profileBtn" style="cursor:pointer;">
-        <div class="user-avatar">E</div>
+        <div class="user-avatar">{{ Auth::user()->name }}</div>
         <div class="username">{{ Auth::user()->name }}</div>
         <div class="language-selector">
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjQjIyMjM0Ii8+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSI1IiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIxMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjUiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=" alt="US Flag" width="20" height="15">
-            EN
+            
             <i class="fas fa-chevron-down"></i>
         </div>
     </div>
@@ -448,7 +456,7 @@
     <div class="drawer-content">
         <!-- Custody Balance -->
         <div class="drawer-item balance-box">
-            <strong>Custody Balance:</strong> $2,450.00
+            <strong>Custody Balance:</strong> $0.00
         </div>
 
         <!-- Notifications -->

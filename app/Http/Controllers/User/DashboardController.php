@@ -31,6 +31,14 @@ class DashboardController extends Controller
      
     }
 
+    public function PaymentHistory() {
+      
+    return view('user.payment-history');  
+     
+    }
+
+    
+
  
 
 public function PayOption()

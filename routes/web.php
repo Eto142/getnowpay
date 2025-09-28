@@ -6,7 +6,13 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\ConversionController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\PaymentHistoryController;
+use App\Http\Controllers\User\SettingsController;
+use App\Http\Controllers\User\WithdrawalController;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 
 Route::get('', function () {
@@ -45,8 +51,27 @@ Route::post('/access-code', [AccessCodeController::class, 'verify'])->name('acce
 
 Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
-Route::post('/conversion', [ConversionController::class, 'store'])->name('conversion.store');
+
+Route::get('/payment-history', [DashboardController::class, 'PaymentHistory'])->name('payment.history');
 Route::get('/gas-billing', [DashboardController::class, 'gasBilling'])->name('gas-billing');
+
+
+//user conversion controller
+Route::post('/conversion', [ConversionController::class, 'store'])->name('conversion.store');
+
+//user withdrawal controller
+Route::get('/withdraw', [WithdrawalController::class, 'index'])->name('withdraw');
+Route::post('/withdraw', [WithdrawalController::class, 'store'])->name('withdraw.store');
+
+
+ Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::post('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
+    Route::post('/settings/bank', [SettingsController::class, 'updateBank'])->name('settings.bank.update');
+    Route::post('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
+
+
+Route::get('/payment-history', [PaymentHistoryController::class, 'index'])->name('payment.history');
+
 
 });
 

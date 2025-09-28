@@ -26,10 +26,9 @@
                 <div class="balance-card fiat">
                     <div class="balance-header">
                         <span class="balance-label">Fiat Balance</span>
-                        <select class="balance-action">
-                            <option>Withdraw</option>
-
-                        </select>
+                       <a href ="{{ route('withdraw') }}" class="balance-action1">
+                            Withdraw
+                       </a>
                     </div>
                     <div class="balance-amount">$0.00</div>
                     <p class="balance-note">Available for withdrawal</p>
@@ -171,6 +170,12 @@
     border: 1px solid #ccc;
 }
 
+.balance-action1 {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+}
 .balance-amount {
     font-size: 22px;
     font-weight: bold;

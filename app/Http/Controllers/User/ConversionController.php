@@ -10,7 +10,7 @@ class ConversionController extends Controller
 {
 
 
-    public function store(Request $request)
+   public function store(Request $request)
 {
     $request->validate([
         'fromCrypto' => 'required|string',
@@ -18,14 +18,27 @@ class ConversionController extends Controller
         'amount'     => 'required|numeric|min:0.01',
     ]);
 
+    // Calculate 0.7% miner's fee
+    $minersFee = $request->amount * 0.007; 
+
+    // Optionally, you can also calculate the final total (amount + fee)
+    $totalWithFee = $request->amount + $minersFee;
+
+    // Save the conversion record
     $conversion = Conversion::create([
         'user_id'     => Auth::id(),
         'from_crypto' => $request->fromCrypto,
         'to_currency' => $request->toCurrency,
         'amount'      => $request->amount,
+        // Optional: you could save the fee too if you have a column
+        // 'miners_fee'  => $minersFee,
     ]);
 
-    // Redirect and pass the conversion data to the billing page
+    // Attach the fee and total to the session so you can display them
+    $conversion->miners_fee = $minersFee;
+    $conversion->total_with_fee = $totalWithFee;
+
+    // Redirect to billing page with all details
     return redirect()->route('gas-billing')
         ->with('conversion', $conversion);
 }
