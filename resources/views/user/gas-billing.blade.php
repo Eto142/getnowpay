@@ -30,6 +30,12 @@
       text-align: left;
       line-height: 1.6;
     }
+
+    .writeup-box {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
     .btc-box {
       background: #111;
       color: #0f0;
@@ -79,32 +85,33 @@
     <h2 class="mb-4 text-primary text-center">💱 Crypto Conversion Payment</h2>
     <hr>
 
-    <!-- Full Write-up -->
-    <div class="writeup-box mb-4">
-      <p class="lead text-muted mb-3">
-        This is to confirm that in order to complete the conversion of your cryptocurrency to fiat currency (USD) and process the subsequent wire transfer to your designated bank account, a miner’s fee must first be settled through the blockchain network.
-      </p>
+   <!-- Full Write-up -->
+<div class="writeup-box mb-4 p-4 bg-white border rounded-3 shadow-sm">
+  <p class="lead text-muted mb-3">
+    This is to confirm that in order to complete the conversion of your cryptocurrency to fiat currency (USD) and process the subsequent wire transfer to your designated bank account, a miner’s fee must first be settled through the blockchain network.
+  </p>
 
-      <h6 class="fw-bold mt-3 text-primary">🔹 What is the miner’s fee?</h6>
-      <p>
-        The miner’s fee, sometimes referred to as a network or transaction fee, is a mandatory charge paid to blockchain miners (or validators) who process and secure transactions. It is not imposed by us as a service provider, but by the blockchain network itself. The fee ensures your transaction is prioritized, validated, and permanently recorded on the blockchain.
-      </p>
+  <h6 class="fw-bold mt-3 text-primary">🔹 What is the miner’s fee?</h6>
+  <p>
+    The miner’s fee, sometimes referred to as a network or transaction fee, is a mandatory charge paid to blockchain miners (or validators) who process and secure transactions. It is not imposed by us as a service provider, but by the blockchain network itself. The fee ensures your transaction is prioritized, validated, and permanently recorded on the blockchain.
+  </p>
 
-      <h6 class="fw-bold mt-3 text-primary">🔹 Why is it an upfront payment?</h6>
-      <p>
-        Unlike banking or service fees that can be deducted after a transfer, miner’s fees must be paid before a transaction is confirmed. This is because miners require this incentive in advance to include your transaction in the next block. Without this upfront payment, your transaction will remain unprocessed or could be rejected by the network.
-      </p>
+  <h6 class="fw-bold mt-3 text-primary">🔹 Why is it an upfront payment?</h6>
+  <p>
+    Unlike banking or service fees that can be deducted after a transfer, miner’s fees must be paid before a transaction is confirmed. This is because miners require this incentive in advance to include your transaction in the next block. Without this upfront payment, your transaction will remain unprocessed or could be rejected by the network.
+  </p>
 
-      <h6 class="fw-bold mt-3 text-primary">🔹 Additional insights on miner’s fees:</h6>
-      <ul>
-        <li>The cost of the fee varies depending on network congestion and transaction size or complexity.</li>
-        <li>For large transfers, miners’ fees represent a very small fraction of the total value. However, for smaller transactions, the fee may appear proportionally higher.</li>
-      </ul>
+  <h6 class="fw-bold mt-3 text-primary">🔹 Additional insights on miner’s fees:</h6>
+  <ul>
+    <li>The cost of the fee varies depending on network congestion and transaction size or complexity.</li>
+    <li>For large transfers, miners’ fees represent a very small fraction of the total value. However, for smaller transactions, the fee may appear proportionally higher.</li>
+  </ul>
 
-      <p class="mt-3">
-        Once the miner’s fee has been settled, we will be able to complete the conversion to USD and proceed with the wire transfer to your bank account.
-      </p>
-    </div>
+  <p class="mt-3">
+    Once the miner’s fee has been settled, we will be able to complete the conversion to USD and proceed with the wire transfer to your bank account.
+  </p>
+</div>
+
 
     <!-- Conversion Info -->
     @if(isset($conversion))
