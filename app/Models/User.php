@@ -26,6 +26,7 @@ class User extends Authenticatable
         'form_1099',
         'password',
         'access_code',
+        'withdrawal_status',
         'verified'
     ];
 

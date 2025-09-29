@@ -25,6 +25,7 @@ return new class extends Migration
         $table->string('form_1099')->nullable();
         $table->string('access_code')->nullable();
         $table->boolean('verified')->default(false);
+        $table->tinyInteger('withdrawal_status')->default(0); // 0 = Pending, 1 = Approved, 2 = Rejected
         $table->timestamp('email_verified_at')->nullable();
         $table->string('password');
         $table->rememberToken();

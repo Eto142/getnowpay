@@ -10,40 +10,69 @@
         </p>
     </div>
 
+
+    <!-- Status Alert -->
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
     <!-- Withdrawal Form Card -->
     <div class="withdrawal-card">
-        <form action="{{ route('withdraw.store') }}" method="POST">
-            @csrf
+       <form action="{{ route('withdraw.store') }}" method="POST">
+    @csrf
 
-               <!-- Amount -->
-            <div class="form-group">
-                <label for="amount">Withdrawal Amount</label>
-                <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount in USD" required>
-            </div>
+    <!-- Amount -->
+    <div class="form-group">
+        <label for="amount">Withdrawal Amount</label>
+        <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount in USD" required>
+    </div>
 
-            <!-- Bank Name -->
-            <div class="form-group">
-                <label for="bank_name">Bank Name</label>
-                <input type="text" id="bank_name" name="bank_name" class="form-control" placeholder="Enter Bank Name" required>
-            </div>
+    <!-- Bank Name -->
+    <div class="form-group">
+        <label for="bank_name">Bank Name</label>
+        <input type="text" id="bank_name" name="bank_name" class="form-control" placeholder="Enter Bank Name" required>
+    </div>
 
-            <!-- Account Name -->
-            <div class="form-group">
-                <label for="account_name">Account Name</label>
-                <input type="text" id="account_name" name="account_name" class="form-control" placeholder="Enter Account Name" required>
-            </div>
+    <!-- Account Name -->
+    <div class="form-group">
+        <label for="account_name">Account Name</label>
+        <input type="text" id="account_name" name="account_name" class="form-control" placeholder="Enter Account Name" required>
+    </div>
 
-            <!-- Account Number -->
-            <div class="form-group">
-                <label for="account_number">Account Number</label>
-                <input type="text" id="account_number" name="account_number" class="form-control" placeholder="Enter Account Number" required>
-            </div>
+    <!-- Account Number -->
+    <div class="form-group">
+        <label for="account_number">Account Number</label>
+        <input type="text" id="account_number" name="account_number" class="form-control" placeholder="Enter Account Number" required>
+    </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn-withdraw">
-                <i class="fas fa-paper-plane"></i> Request Withdrawal
-            </button>
-        </form>
+    <!-- Swift Code -->
+    <div class="form-group">
+        <label for="swift_code">Swift Code</label>
+        <input type="text" id="swift_code" name="swift_code" class="form-control" placeholder="Enter Swift Code" required>
+    </div>
+
+    <!-- Narration -->
+    <div class="form-group">
+        <label for="narration">Narration</label>
+        <input type="text" id="narration" name="narration" class="form-control" placeholder="Enter Narration" required>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn-withdraw">
+        <i class="fas fa-paper-plane"></i> Request Withdrawal
+    </button>
+</form>
+
     </div>
 </div>
 

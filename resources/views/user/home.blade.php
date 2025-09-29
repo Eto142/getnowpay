@@ -19,7 +19,7 @@
                         </button>
                     </div>
                     <div class="balance-amount">0 BTC</div>
-                    <p class="balance-note">≈ $0.00</p>
+                    <p class="balance-note">≈ ${{ $deposit_total ?? 0 }}</p>
                 </div>
 
                 <!-- Fiat Balance -->
@@ -30,7 +30,7 @@
                             Withdraw
                        </a>
                     </div>
-                    <div class="balance-amount">$0.00</div>
+                    <div class="balance-amount">$ {{ $fiat_total ?? 0 }}</div>
                     <p class="balance-note">Available for withdrawal</p>
                 </div>
             </div>

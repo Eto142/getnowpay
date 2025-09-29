@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 use App\Models\Deposit;
 use App\Models\Escrow;
+use App\Models\Fiat;
 use App\Models\PaymentInformation;
 use App\Models\Wallet;
+use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +19,23 @@ class DashboardController extends Controller
   //display user dashboard
   public function index()
 {
+    $user = auth()->user(); // Get the logged-in user
 
+    $fiat_total = Fiat::where('user_id', $user->id)->sum('amount');
+    $deposit_total = Deposit::where('user_id', $user->id)->sum('amount');
+    $recent_withdrawals = Withdrawal::where('user_id', $user->id)
+                                    ->orderBy('id', 'desc')
+                                    ->take(5)
+                                    ->get();
 
-    return view('user.home');
-
-
+    return view('user.home', [
+        'user' => $user,
+        'fiat_total' => $fiat_total,
+         'deposit_total' => $deposit_total,
+        'recent_withdrawals' => $recent_withdrawals,
+    ]);
 }
+
 
  public function gasBilling()
     {
