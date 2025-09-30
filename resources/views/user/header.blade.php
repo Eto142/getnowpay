@@ -456,12 +456,12 @@
     <div class="drawer-content">
         <!-- Custody Balance -->
         <div class="drawer-item balance-box">
-            <strong>Custody Balance:</strong> $0.00
+            <strong>Custody Balance:</strong> ${{ $fiat_total ?? 0 }}
         </div>
 
         <!-- Notifications -->
-        <a href="#" class="drawer-item">
-            <i class="fas fa-bell"></i> Notifications
+        <a href="{{ route('settings.index') }}" class="drawer-item">
+            <i class="fas fa-bell"></i> Settings
         </a>
 
         <!-- Support -->
