@@ -404,11 +404,15 @@
                 </a>
             </div>
 
-             <div class="nav-item">
-                <a href="{{ route('user.logout') }}" class="nav-link">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </div>
+
+             <!-- Sign Out -->
+        <form method="POST" action="{{ route('user.logout') }}">
+            @csrf
+            <button type="submit" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
+            
             
            
           
