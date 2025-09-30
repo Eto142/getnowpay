@@ -381,12 +381,12 @@
                 </a>
             </div>
 
-            <div class="nav-item">
+            {{-- <div class="nav-item">
                 <a href="{{ route('withdraw') }}" class="nav-link">
                     <i class="fas fa-money-bill-wave"></i>
                     Withdrawal
                 </a>
-            </div>
+            </div> --}}
 
 
             <div class="nav-item">

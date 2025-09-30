@@ -4,7 +4,7 @@
     <!-- Page Header -->
     <div class="page-header">
         <h1 class="dashboard-title">⚙️ Settings</h1>
-        <p class="dashboard-subtitle">Manage your account details, bank info, and security settings.</p>
+        <p class="dashboard-subtitle">Manage your account details and security settings.</p>
     </div>
 
     <div class="settings-container">
@@ -29,7 +29,7 @@
             </form>
         </div>
 
-        <!-- Bank Details -->
+        {{-- <!-- Bank Details -->
         <div class="settings-card">
             <h2 class="settings-title"><i class="fas fa-university"></i> Bank Details</h2>
             <form action="{{ route('settings.bank.update') }}" method="POST">
@@ -53,7 +53,7 @@
                     <i class="fas fa-wallet"></i> Update Bank Info
                 </button>
             </form>
-        </div>
+        </div> --}}
 
         <!-- Password Reset -->
         <div class="settings-card">

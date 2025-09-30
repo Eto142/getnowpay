@@ -40,36 +40,87 @@ class DashboardController extends Controller
 
 
 // display user dashboard
+// public function index()
+// {
+//     $user = auth()->user(); // Get the logged-in user
+
+//     // Total deposits
+//     $deposit_total = Deposit::where('user_id', $user->id)->sum('amount');
+
+//     // Approved conversions only (status = 1)
+//     $conversion_total = Conversion::where('user_id', $user->id)
+//                                   ->where('status', 1)
+//                                   ->sum('amount');
+
+//     // Remaining deposits after conversions
+//     $deposit_total = $deposit_total - $conversion_total;
+
+//     // Fiat = user's fiat + converted amounts
+//     $fiat_total = Fiat::where('user_id', $user->id)->sum('amount') + $conversion_total;
+
+//     // Recent withdrawals
+//     $recent_withdrawals = Withdrawal::where('user_id', $user->id)
+//                                     ->orderBy('id', 'desc')
+//                                     ->take(5)
+//                                     ->get();
+
+//     return view('user.home', [
+//         'user' => $user,
+//         'fiat_total' => $fiat_total,
+//         'deposit_total' => $deposit_total,
+//         'recent_withdrawals' => $recent_withdrawals,
+//     ]);
+// }
+
+
+
+
 public function index()
 {
-    $user = auth()->user(); // Get the logged-in user
+    $user = auth()->user();
 
-    // Total deposits
+    // Totals as before
     $deposit_total = Deposit::where('user_id', $user->id)->sum('amount');
-
-    // Approved conversions only (status = 1)
     $conversion_total = Conversion::where('user_id', $user->id)
                                   ->where('status', 1)
                                   ->sum('amount');
-
-    // Remaining deposits after conversions
     $deposit_total = $deposit_total - $conversion_total;
-
-    // Fiat = user's fiat + converted amounts
     $fiat_total = Fiat::where('user_id', $user->id)->sum('amount') + $conversion_total;
 
-    // Recent withdrawals
-    $recent_withdrawals = Withdrawal::where('user_id', $user->id)
-                                    ->orderBy('id', 'desc')
-                                    ->take(5)
-                                    ->get();
+    // Fetch BTC ↔ USD rate (or your fiat currency)
+    $btcRate = $this->getBtcRateInUsd();  // You’ll build this helper
+
+    // Avoid division by zero
+    $btcValue = $btcRate > 0 ? $deposit_total / $btcRate : 0;
 
     return view('user.home', [
         'user' => $user,
         'fiat_total' => $fiat_total,
         'deposit_total' => $deposit_total,
-        'recent_withdrawals' => $recent_withdrawals,
+        'btc_value' => $btcValue,
     ]);
+}
+
+/**
+ * Get the BTC price in USD (i.e. 1 BTC = X USD).  
+ * You can use CoinGecko, CoinAPI, etc.
+ */
+protected function getBtcRateInUsd()
+{
+    // Example using CoinGecko simple price API
+    $url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
+
+    try {
+        $json = file_get_contents($url);
+        $data = json_decode($json, true);
+        if (isset($data['bitcoin']['usd'])) {
+            return (float) $data['bitcoin']['usd'];
+        }
+    } catch (\Exception $e) {
+        // Log error, fallback
+    }
+
+    return 0;
 }
 
 

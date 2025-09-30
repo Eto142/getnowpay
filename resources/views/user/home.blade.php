@@ -27,8 +27,13 @@
                             Convert
                         </button>
                     </div>
-                    <div class="balance-amount">0 BTC</div>
-                    <p class="balance-note">≈ ${{ $deposit_total ?? 0 }}</p>
+<div class="balance-amount">
+    {{ number_format($btc_value, 8) }} BTC
+</div>
+<p class="balance-note">
+    ≈ ${{ number_format($deposit_total ?? 0, 2) }}
+</p>
+
                 </div>
 
                 <!-- Fiat Balance -->

@@ -1569,15 +1569,15 @@
           <p class="footer-description">
             Instant and reliable payments for businesses and individuals, built on Multi-Party Computation (MPC) custody.
           </p>
-          <div class="social-icons">
+          {{-- <div class="social-icons">
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
             <a href="#"><i class="fab fa-youtube"></i></a>
-          </div>
+          </div> --}}
         </div>
-        <div class="col-lg-2 col-md-6 mb-4">
+        {{-- <div class="col-lg-2 col-md-6 mb-4">
           <h4 class="footer-heading">Products</h4>
           <ul class="footer-links">
             <li><a href="#">Crypto Payments</a></li>
@@ -1617,10 +1617,10 @@
             <li><a href="#">Security</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
-        </div>
+        </div> --}}
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2023 GETNOWPAY. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <p>&copy; 2025 GETNOWPAY. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
       </div>
     </div>
   </footer>

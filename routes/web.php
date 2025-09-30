@@ -50,6 +50,7 @@ Route::post('/access-code', [AccessCodeController::class, 'verify'])->name('acce
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 Route::get('/payment-history', [DashboardController::class, 'PaymentHistory'])->name('payment.history');
