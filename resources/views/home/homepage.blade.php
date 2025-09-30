@@ -953,29 +953,7 @@
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#"><i class="fas fa-university"></i> GETNOWPAY</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link" href="#">FOR BUSINESSES </a></li>
-          <li class="nav-item"><a class="nav-link" href="#">FOR INDIVIDUALS </a></li>
-          <li class="nav-item"><a class="nav-link" href="#">RESOURCES </a></li>
-          <li class="nav-item"><a class="nav-link" href="#">COINS</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">SUPPORT</a></li>
-        </ul>
-        <div class="d-flex">
-           <a href="{{ route('login') }}" class="btn btn-login">LOG IN</a>
-              <a href="{{ url('register') }}" class="btn btn-signup">SIGN UP</a>
-         
-        </div>
-      </div>
-    </div>
-  </nav>
+@include('home.header')
 
   <!-- Hero Section (with car image) -->
   <section class="hero-section">
@@ -1089,7 +1067,7 @@
     </div>
   </section>
 
-  <!-- Withdrawal Fees Section -->
+  {{-- <!-- Withdrawal Fees Section -->
   <section class="content-section">
     <div class="container">
       <div class="row align-items-center">
@@ -1217,9 +1195,9 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
-  <!-- Invoice Section -->
+  {{-- <!-- Invoice Section -->
   <section class="content-section">
     <div class="container">
       <div class="row align-items-center">
@@ -1321,7 +1299,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <!-- Features Grid -->
   <section class="content-section">
@@ -1372,7 +1350,7 @@
     </div>
   </section>
 
-  <!-- Transaction Verification Section -->
+  {{-- <!-- Transaction Verification Section -->
   <section class="content-section">
     <div class="container">
       <div class="row align-items-center">
@@ -1504,7 +1482,7 @@
         <p>ACCEPTED FOR PAYMENTS</p>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <!-- Benefits Section -->
   <section class="benefits-section">

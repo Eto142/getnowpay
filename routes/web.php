@@ -19,6 +19,24 @@ Route::get('', function () {
     return view('home.homepage');
 });
 
+Route::get('coin', function () {
+    return view('home.coin');
+});
+
+Route::get('resources', function () {
+    return view('home.resources');
+});
+
+Route::get('individual', function () {
+    return view('home.individual');
+});
+
+Route::get('business', function () {
+    return view('home.business');
+});
+
+
+
 Route::get('crypto/2025/secure-online/payment', function () {
     return view('home.homepage');
 });
