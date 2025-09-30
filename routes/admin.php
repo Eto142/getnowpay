@@ -46,6 +46,7 @@ use Illuminate\Support\Facades\Route;
   
   Route::post('/add-deposit', [DepositController::class, 'AddUserDeposit'])->name('add.deposit');
 
+    Route::post('/add-conversion', [DepositController::class, 'AddUserConversion'])->name('add.conversion');
 
 // Approve a withdrawal
 Route::post('/admin/withdrawal/{id}/approve', [WithdrawalController::class, 'approve'])

@@ -9,6 +9,15 @@
             <!-- Crypto & Fiat Balances -->
             <div class="balances-section">
                 <h2 class="section-title">Your Balances</h2>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
                 <!-- Crypto Balance -->
                 <div class="balance-card crypto">

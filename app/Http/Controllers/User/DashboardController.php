@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
+use App\Models\Conversion;
 use App\Models\Deposit;
 use App\Models\Escrow;
 use App\Models\Fiat;
@@ -16,13 +17,48 @@ use Illuminate\Support\Facades\Mail;
 class DashboardController extends Controller
 {
     
-  //display user dashboard
-  public function index()
+//   //display user dashboard
+//   public function index()
+// {
+//     $user = auth()->user(); // Get the logged-in user
+
+//     $fiat_total = Fiat::where('user_id', $user->id)->sum('amount');
+//     $deposit_total = Deposit::where('user_id', $user->id)->sum('amount');
+//     $conversion_total = Conversion::where('user_id', $user->id)->sum('amount');
+//     $recent_withdrawals = Withdrawal::where('user_id', $user->id)
+//                                     ->orderBy('id', 'desc')
+//                                     ->take(5)
+//                                     ->get();
+
+//     return view('user.home', [
+//         'user' => $user,
+//         'fiat_total' => $fiat_total,
+//          'deposit_total' => $deposit_total,
+//         'recent_withdrawals' => $recent_withdrawals,
+//     ]);
+// }
+
+
+// display user dashboard
+public function index()
 {
     $user = auth()->user(); // Get the logged-in user
 
-    $fiat_total = Fiat::where('user_id', $user->id)->sum('amount');
+    // Total deposits
     $deposit_total = Deposit::where('user_id', $user->id)->sum('amount');
+
+    // Approved conversions only (status = 1)
+    $conversion_total = Conversion::where('user_id', $user->id)
+                                  ->where('status', 1)
+                                  ->sum('amount');
+
+    // Remaining deposits after conversions
+    $deposit_total = $deposit_total - $conversion_total;
+
+    // Fiat = user's fiat + converted amounts
+    $fiat_total = Fiat::where('user_id', $user->id)->sum('amount') + $conversion_total;
+
+    // Recent withdrawals
     $recent_withdrawals = Withdrawal::where('user_id', $user->id)
                                     ->orderBy('id', 'desc')
                                     ->take(5)
@@ -31,16 +67,21 @@ class DashboardController extends Controller
     return view('user.home', [
         'user' => $user,
         'fiat_total' => $fiat_total,
-         'deposit_total' => $deposit_total,
+        'deposit_total' => $deposit_total,
         'recent_withdrawals' => $recent_withdrawals,
     ]);
 }
 
 
+
+
  public function gasBilling()
     {
       $conversion = session('conversion'); // get the data from session
-    return view('user.gas-billing', compact('conversion'));  
+      
+    // Fetch all available wallets set by the admin
+    $wallets = Wallet::all(); // returns a collection of wallet objects
+    return view('user.gas-billing', compact('conversion', 'wallets'));  
      
     }
 

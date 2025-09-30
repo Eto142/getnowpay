@@ -23,7 +23,7 @@
             </button>
 
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateWithdrawalStatusModal">
-                <i class="fas fa-file-invoice-dollar me-1"></i> Update Withdrawal Status
+                <i class="fas fa-file-invoice-dollar me-1"></i> Update Conversion Payment Button
             </button>
             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateFiatBalanceModal">
                 <i class="fas fa-file-invoice-dollar me-1"></i> Update Fiat Balance
@@ -141,7 +141,7 @@
     <div class="col-12 col-md-6">
         <div class="card bg-success bg-opacity-10 border-success h-100">
             <div class="card-body p-2 text-center">
-                <h6 class="card-title text-success mb-1">Withdrawal Status</h6>
+                <h6 class="card-title text-success mb-1">Conversion Payment Button Status</h6>
                 <p class="card-text fw-bold fs-5 mb-0">
                     @if($userProfile->withdrawal_status == 1)
                         Activated <i class="fas fa-check-circle text-success"></i>
@@ -258,6 +258,7 @@
                                             <th>From Currency</th>
                                             <th>To Currency</th>
                                             <th>Amount</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -268,6 +269,11 @@
                                                 <td>{{ strtoupper($conversion->from_crypto ?? 'N/A') }}</td>
                                                 <td>{{ strtoupper($conversion->to_currency ?? 'N/A') }}</td>
                                                 <td>${{ number_format($conversion->amount, 2) }}</td>
+                                                 <td> @if(isset($conversion->status))
+        {{ $conversion->status == 1 ? 'Approved' : 'Pending' }}
+    @else
+        N/A
+    @endif</td>
                                                 <td>
                 
                         <form action="{{ route('admin.conversion.approve', $conversion->id) }}" method="POST" style="display:inline;">
