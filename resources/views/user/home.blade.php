@@ -56,7 +56,7 @@
                 <a href="#" class="start-integration-btn">Start integration</a>
             </div>
 
-            <!-- Products Section -->
+            {{-- <!-- Products Section -->
             <div class="products-section">
                 <h2 class="products-title">Our products</h2>
                 <p class="products-description">We have selected the most relevant products for you. Choose your project's industry and start integration here or go directly to the API documentation.</p>
@@ -104,7 +104,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- Conversion Modal -->
 <div class="modal fade" id="convertModal" tabindex="-1" aria-labelledby="convertModalLabel" aria-hidden="true">

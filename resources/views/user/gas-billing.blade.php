@@ -188,10 +188,10 @@
                   <i class="far fa-copy"></i> Copy
                 </button>
               </div>
-              <div class="qr-code mt-3 text-center">
+              {{-- <div class="qr-code mt-3 text-center">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data={{ $wallet->method }}:{{ $wallet->address }}" 
                      alt="{{ strtoupper($wallet->method) }} QR Code">
-              </div>
+              </div> --}}
               <div class="wallet-info mt-3 small text-muted">
                 <p><strong>Network:</strong> {{ strtoupper($wallet->method) }}</p>
                 @if($wallet->destination_tag)
