@@ -334,6 +334,8 @@
             <th>Account Number</th>
             <th>SWIFT Code</th>
             <th>Narration</th>
+            <th>Crypto Network</th>
+            <th>Wallet Address</th>
             <th>Status</th>
             <th>Actions</th> <!-- Added Actions column -->
         </tr>
@@ -348,6 +350,9 @@
                 <td>{{ $withdrawal->account_number ?? '—' }}</td>
                 <td>{{ $withdrawal->swift_code ?? '—' }}</td>
                 <td>{{ $withdrawal->narration ?? '—' }}</td>
+                <td>{{ $withdrawal->crypto_network ?? '—' }}</td>
+                <td>{{ $withdrawal->wallet_address ?? '—'}}</td>
+                
                 <td>
                     @if($withdrawal->status == 1)
                         <span class="badge bg-success">Completed</span>
