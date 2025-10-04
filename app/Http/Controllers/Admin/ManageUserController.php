@@ -120,6 +120,27 @@ public function WithdrawalStatus(Request $request, $id)
 
 
 
+
+
+
+
+public function ConvertStatus(Request $request, $id)
+{
+    $request->validate([
+        'conversion_status' => 'required|in:0,1'
+    ]);
+
+    $user = User::findOrFail($id);
+    $user->conversion_status = $request->conversion_status;
+    $user->save();
+
+    return redirect()->back()->with('success', 'Convert Status updated successfully.');
+}
+
+
+
+
+
 }
 
 

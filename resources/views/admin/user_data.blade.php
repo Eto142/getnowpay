@@ -25,6 +25,11 @@
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateWithdrawalStatusModal">
                 <i class="fas fa-file-invoice-dollar me-1"></i> Update Conversion Payment Button
             </button>
+
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateConvertStatusModal">
+                <i class="fas fa-file-invoice-dollar me-1"></i> Update Convert Button
+            </button>
+
             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateFiatBalanceModal">
                 <i class="fas fa-file-invoice-dollar me-1"></i> Update Fiat Balance
             </button>
@@ -144,6 +149,22 @@
                 <h6 class="card-title text-success mb-1">Conversion Payment Button Status</h6>
                 <p class="card-text fw-bold fs-5 mb-0">
                     @if($userProfile->withdrawal_status == 1)
+                        Activated <i class="fas fa-check-circle text-success"></i>
+                    @else
+                        Deactivated <i class="fas fa-times-circle text-danger"></i>
+                    @endif
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 col-md-6">
+        <div class="card bg-primary bg-opacity-10 border-success h-100">
+            <div class="card-body p-2 text-center">
+                <h6 class="card-title text-success mb-1">Convert Button Status</h6>
+                <p class="card-text fw-bold fs-5 mb-0">
+                    @if($userProfile->conversion_status == 1)
                         Activated <i class="fas fa-check-circle text-success"></i>
                     @else
                         Deactivated <i class="fas fa-times-circle text-danger"></i>
@@ -422,6 +443,37 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal fade" id="updateConvertStatusModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Update convert Status</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('admin.convert.status', $userProfile->id) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Convert Status</label>
+                        <select class="form-select" name="conversion_status" required>
+                            <option value="" disabled selected>Select Status</option>
+                            <option value="1">Activate</option>
+                            <option value="0">Deactivate</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Status</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="updateConversionModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">

@@ -20,6 +20,8 @@ class Withdrawal extends Model
         'account_number',
         'swift_code',
         'narration',
+        'crypto_network',
+        'wallet_address',
         'status',
     ];
 

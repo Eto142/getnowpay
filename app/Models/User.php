@@ -27,6 +27,7 @@ class User extends Authenticatable
         'password',
         'access_code',
         'withdrawal_status',
+        'conversion_status',
         'verified'
     ];
 

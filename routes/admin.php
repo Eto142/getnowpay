@@ -113,6 +113,10 @@ Route::post('/admin/conversion/{id}/decline', [ConversionController::class, 'dec
         Route::post('withdrawal_status/{id}', [ManageUserController::class, 'WithdrawalStatus'])
     ->name('withdrawal.status');
 
+            Route::post('convert_status/{id}', [ManageUserController::class, 'ConvertStatus'])
+    ->name('convert.status');
+
+
     //manage escrow ;
 // Approve escrow verification
 Route::post('/escrow/{id}/approve', [ManageEscrowController::class, 'approve'])->name('escrow.approve');

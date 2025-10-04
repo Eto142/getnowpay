@@ -23,9 +23,50 @@
                 <div class="balance-card crypto">
                     <div class="balance-header">
                         <span class="balance-label">Crypto Balance</span>
-                        <button class="balance-action" data-bs-toggle="modal" data-bs-target="#convertModal">
-                            Convert
-                        </button>
+                       @if(Auth::check())
+    @if(Auth::user()->conversion_status == 1)
+        <!-- Write-up only -->
+        <div style="
+            background: linear-gradient(135deg, #fff9e6, #fff3cd);
+            border: 1px solid #ffeeba;
+            border-radius: 15px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            color: #856404;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.6;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        ">
+            ⚠️ Kindly convert your whole assets to prevent fluctuations.<br>
+            <span style="font-size: 14px; font-weight: 500; color: #7a6d39;">
+                Converting helps stabilize your portfolio against market volatility.
+            </span>
+        </div>
+    @elseif(Auth::user()->conversion_status == 0)
+        <!-- Convert Button -->
+        <div style="text-align: center; margin-bottom: 25px;">
+            <button class="balance-action"
+                    data-bs-toggle="modal"
+                    data-bs-target="#convertModal"
+                    style="
+                        background: linear-gradient(135deg, #3498db, #2ecc71);
+                        border: none;
+                        color: #fff;
+                        padding: 12px 25px;
+                        border-radius: 12px;
+                        font-size: 15px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: 0.3s;
+                    ">
+                Convert
+            </button>
+        </div>
+    @endif
+@endif
+
                     </div>
 <div class="balance-amount">
     {{ number_format($btc_value, 8) }} BTC
