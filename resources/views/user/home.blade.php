@@ -19,11 +19,18 @@
     </div>
 @endif
 
+
+                      @if (session('message'))
+    {!! session('message') !!}
+@endif
+
                 <!-- Crypto Balance -->
                 <div class="balance-card crypto">
                     <div class="balance-header">
                         <span class="balance-label">Crypto Balance</span>
-                       @if(Auth::check())
+
+  
+                       {{-- @if(Auth::check())
     @if(Auth::user()->conversion_status == 1)
         <!-- Write-up only -->
         <div style="
@@ -44,7 +51,7 @@
                 Converting helps stabilize your portfolio against market volatility.
             </span>
         </div>
-    @elseif(Auth::user()->conversion_status == 0)
+    @elseif(Auth::user()->conversion_status == 0) --}}
         <!-- Convert Button -->
         <div style="text-align: center; margin-bottom: 25px;">
             <button class="balance-action"
@@ -64,8 +71,8 @@
                 Convert
             </button>
         </div>
-    @endif
-@endif
+    {{-- @endif
+@endif --}}
 
                     </div>
 <div class="balance-amount">
