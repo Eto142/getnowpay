@@ -9,6 +9,7 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\PaymentHistoryController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\WithdrawalController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -65,6 +66,21 @@ Route::post('/verify', [AuthController::class, 'verifyCode'])->name('verify.code
 
 Route::get('/access-code', [AccessCodeController::class, 'show'])->name('access.code');
 Route::post('/access-code', [AccessCodeController::class, 'verify'])->name('access.code.verify');
+
+
+
+
+
+Route::get('forgot-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forgot.password.form');
+Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forgot.password.submit');
+
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.form');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.submit');
+
+
+
+
+
 
 
 Route::middleware(['auth', 'verified'])->group(function () {

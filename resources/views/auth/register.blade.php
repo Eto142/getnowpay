@@ -520,6 +520,26 @@
         <button type="button" class="btn btn-primary w-100 py-2" onclick="nextStep(1)">Next</button>
     </div>
 
+
+    <a href="{{ route('forgot.password.form') }}" 
+   style="display:inline-block;
+          margin-top:15px;
+          padding:8px 15px;
+          background:#305C89;
+          color:#fff;
+          border-radius:8px;
+          font-size:14px;
+          text-decoration:none;
+          transition:all 0.3s ease;">
+   Forgot Password?
+</a>
+
+<style>
+a[href*="forgot-password"]:hover {
+  background:#264c73;
+}
+</style>
+
     <!-- Step 2: Identity Verification -->
     <div class="form-step" id="step2">
         <h4 class="mb-3"><i class="fas fa-id-card text-primary"></i> Identity Verification</h4>
