@@ -326,6 +326,26 @@
         <button type="submit" class="btn btn-primary w-100">Sign In</button>
     </form>
 </div>
+
+
+    <a href="{{ route('forgot.password.form') }}" 
+   style="display:inline-block;
+          margin-top:15px;
+          padding:8px 15px;
+          background:#305C89;
+          color:#fff;
+          border-radius:8px;
+          font-size:14px;
+          text-decoration:none;
+          transition:all 0.3s ease;">
+   Forgot Password?
+</a>
+
+<style>
+a[href*="forgot-password"]:hover {
+  background:#264c73;
+}
+</style>
             
             <!-- Registration Link -->
             <div class="login-footer">
