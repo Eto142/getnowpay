@@ -323,18 +323,24 @@
         
         </div>
         
-    <a href="{{ route('forgot.password.form') }}" 
-   style="display:inline-block;
-          margin-top:15px;
-          padding:8px 15px;
-          background:#305C89;
-          color:#fff;
-          border-radius:8px;
+   <a href="{{ route('forgot.password.form') }}" 
+   style="display:inline;
+          margin-top:12px;
+          color:#305C89;
           font-size:14px;
           text-decoration:none;
-          transition:all 0.3s ease;">
+          font-weight:500;
+          transition:color 0.3s ease;">
    Forgot Password?
 </a>
+
+<style>
+a[href="{{ route('forgot.password.form') }}"]:hover {
+    color: #1a4c7e;
+    text-decoration: underline;
+}
+</style>
+
 
 <style>
 a[href*="forgot-password"]:hover {
