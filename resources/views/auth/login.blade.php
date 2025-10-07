@@ -275,23 +275,34 @@
                 <p class="login-subtitle">Sign in to your account</p>
             </div>
 
-           <!-- Error/Success Messages -->
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    @if(session('warning'))
-        <div class="alert alert-warning">{{ session('warning') }}</div>
-    @endif
-    @if($errors->any())
-        <div class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                <div>{{ $error }}</div>
-            @endforeach
-        </div>
-    @endif
+          <!-- Flash Messages -->
+@if(session('success'))
+    <div class="alert alert-success mt-3" style="
+        background: #d1e7dd;
+        border: 1px solid #badbcc;
+        border-radius: 10px;
+        padding: 15px;
+        color: #0f5132;
+        font-size: 15px;
+    ">
+        {{ session('success') }}
+    </div>
+@endif
 
+@if(session('warning'))
+    <div class="alert alert-warning mt-3" style="
+        background: #fff3cd;
+        border: 1px solid #ffecb5;
+        border-radius: 10px;
+        padding: 15px;
+        color: #664d03;
+        font-size: 15px;
+    ">
+        {{ session('warning') }}
+    </div>
+@endif
 
-    @if ($errors->any())
+@if($errors->any())
     <div class="alert alert-danger mt-3" style="
         background: #f8d7da;
         border: 1px solid #f5c2c7;
@@ -304,6 +315,8 @@
     </div>
 @endif
 
+
+    
 
     <!-- Login Form -->
     <form method="POST" action="{{ route('login.submit') }}">
