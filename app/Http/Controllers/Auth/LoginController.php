@@ -56,13 +56,34 @@ class LoginController extends Controller
     if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
         $user = Auth::user();
 
+        // // 🔒 Suspend check
+        // if ($user->suspended == 1) {
+        //     Auth::logout();
+        //     return redirect()->route('login')->withErrors([
+        //         'email' => 'Were very sorry to inform you that your access link has been suspended. Kindly contact support for more help using the email address below',
+        //     ]);
+        // }
+
+
+        //  // 🔒 Suspend check
+        // if ($user->suspended == 1) {
+        //     Auth::logout();
+        //     return redirect()->route('login')->withErrors([
+        //         'email' => 'We’re very sorry to inform you that your access link has been suspended. Kindly contact support for more help using the email address below.',
+        //     ]);
+        // }
+
+        
         // 🔒 Suspend check
         if ($user->suspended == 1) {
             Auth::logout();
             return redirect()->route('login')->withErrors([
-                'email' => 'Your account has been suspended. Contact support for help.',
+                'email' => 'We’re very sorry to inform you that your access link has been suspended. Kindly contact support for more help using the email address below:<br><a href="mailto:support@getnowpay.online" style="color:#0d6efd; text-decoration:underline;">support@getnowpay.online</a>',
             ]);
         }
+
+
+
 
         // ✅ Access code verification check
         if (!$user->verified) {
