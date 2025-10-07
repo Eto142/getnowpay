@@ -75,28 +75,82 @@ class DashboardController extends Controller
 
 
 
+// public function index()
+// {
+//     $user = auth()->user();
+
+//     // Totals as before
+//     $deposit_total = Deposit::where('user_id', $user->id)->sum('amount');
+//      $withdrawal_total = Withdrawal::where('user_id', $user->id)
+//     ->where('status', 1)
+//     ->sum('amount');
+
+//     $conversion_total = Conversion::where('user_id', $user->id)
+//                                   ->where('status', 1)
+//                                   ->sum('amount');
+//     $deposit_total = $deposit_total - $conversion_total;
+//     $fiat_total = Fiat::where('user_id', $user->id)->sum('amount')
+//     + $conversion_total
+//     - $withdrawal_total;
+
+//     // Fetch BTC ↔ USD rate (or your fiat currency)
+//     $btcRate = $this->getBtcRateInUsd();  // You’ll build this helper
+
+//     // Avoid division by zero
+//     $btcValue = $btcRate > 0 ? $deposit_total / $btcRate : 0;
+
+//     return view('user.home', [
+//         'user' => $user,
+//         'fiat_total' => $fiat_total,
+//         'deposit_total' => $deposit_total,
+//         'btc_value' => $btcValue,
+//     ]);
+// }
+
+
+
+
 public function index()
 {
     $user = auth()->user();
 
     // Totals as before
     $deposit_total = Deposit::where('user_id', $user->id)->sum('amount');
-     $withdrawal_total = Withdrawal::where('user_id', $user->id)
-    ->where('status', 1)
-    ->sum('amount');
+    $withdrawal_total = Withdrawal::where('user_id', $user->id)
+        ->where('status', 1)
+        ->sum('amount');
 
-    $conversion_total = Conversion::where('user_id', $user->id)
-                                  ->where('status', 1)
-                                  ->sum('amount');
+    // Get approved conversions
+    $approvedConversions = Conversion::where('user_id', $user->id)
+        ->where('status', 1)
+        ->get();
+
+    // ✅ Insert approved conversions into Fiat if not already inserted
+    foreach ($approvedConversions as $conversion) {
+        $exists = Fiat::where('user_id', $user->id)
+            ->where('conversion_id', $conversion->id) // assumes a conversion_id column in fiats table
+            ->exists();
+
+        if (! $exists) {
+            Fiat::create([
+                'user_id' => $user->id,
+                'conversion_id' => $conversion->id,
+                'amount' => $conversion->amount,
+                'status' => 1, // optional
+            ]);
+        }
+    }
+
+    // Calculate totals
+    $conversion_total = $approvedConversions->sum('amount');
     $deposit_total = $deposit_total - $conversion_total;
+
     $fiat_total = Fiat::where('user_id', $user->id)->sum('amount')
-    + $conversion_total
-    - $withdrawal_total;
+        + $conversion_total
+        - $withdrawal_total;
 
-    // Fetch BTC ↔ USD rate (or your fiat currency)
-    $btcRate = $this->getBtcRateInUsd();  // You’ll build this helper
-
-    // Avoid division by zero
+    // BTC rate logic
+    $btcRate = $this->getBtcRateInUsd();
     $btcValue = $btcRate > 0 ? $deposit_total / $btcRate : 0;
 
     return view('user.home', [
@@ -106,6 +160,7 @@ public function index()
         'btc_value' => $btcValue,
     ]);
 }
+
 
 /**
  * Get the BTC price in USD (i.e. 1 BTC = X USD).  
