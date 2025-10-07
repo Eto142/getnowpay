@@ -28,7 +28,8 @@ class User extends Authenticatable
         'access_code',
         'withdrawal_status',
         'conversion_status',
-        'verified'
+        'verified',
+        'suspended'
     ];
 
     /**

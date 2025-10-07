@@ -116,6 +116,12 @@ Route::post('/admin/conversion/{id}/decline', [ConversionController::class, 'dec
             Route::post('convert_status/{id}', [ManageUserController::class, 'ConvertStatus'])
     ->name('convert.status');
 
+              Route::post('suspend-user/{id}', [ManageUserController::class, 'SuspendUser'])
+    ->name('suspend.user');
+
+    
+
+
 
     //manage escrow ;
 // Approve escrow verification

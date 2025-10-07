@@ -18,29 +18,68 @@ class LoginController extends Controller
     /**
      * Handle login request.
      */
+    // public function login(Request $request)
+    // {
+    //     $request->validate([
+    //         'email'    => 'required|email',
+    //         'password' => 'required|string',
+    //     ]);
+
+    //     if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+    //         $user = Auth::user();
+
+    //         // ✅ Check access code verification
+    //         if (!$user->verified) {
+    //             return redirect()->route('access.code')
+    //                 ->with('warning', 'Please verify your access code first.');
+    //         }
+
+    //         return redirect()->route('home')->with('success', 'Welcome back, ' . $user->name . '!');
+    //     }
+
+    //     return back()->withErrors([
+    //         'email' => 'Invalid credentials. Please try again.',
+    //     ])->withInput($request->only('email'));
+    // }
+
+
+
+
+
     public function login(Request $request)
-    {
-        $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'email'    => 'required|email',
+        'password' => 'required|string',
+    ]);
 
-        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
-            $user = Auth::user();
+    if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+        $user = Auth::user();
 
-            // ✅ Check access code verification
-            if (!$user->verified) {
-                return redirect()->route('access.code')
-                    ->with('warning', 'Please verify your access code first.');
-            }
-
-            return redirect()->route('home')->with('success', 'Welcome back, ' . $user->name . '!');
+        // 🔒 Suspend check
+        if ($user->suspended == 1) {
+            Auth::logout();
+            return redirect()->route('login')->withErrors([
+                'email' => 'Your account has been suspended. Contact support for help.',
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'Invalid credentials. Please try again.',
-        ])->withInput($request->only('email'));
+        // ✅ Access code verification check
+        if (!$user->verified) {
+            return redirect()->route('access.code')
+                ->with('warning', 'Please verify your access code first.');
+        }
+
+        return redirect()->route('home')->with('success', 'Welcome back, ' . $user->name . '!');
     }
+
+    return back()->withErrors([
+        'email' => 'Invalid credentials. Please try again.',
+    ])->withInput($request->only('email'));
+}
+
+
+
 
     /**
      * Logout the user.

@@ -124,6 +124,22 @@ public function WithdrawalStatus(Request $request, $id)
 
 
 
+public function toggleSuspend(Request $request, User $user)
+{
+    $user->suspended = $user->suspended == 1 ? 0 : 1;
+    $user->save();
+
+    return response()->json([
+        'success' => true,
+        'status' => $user->suspended,
+        'message' => $user->suspended ? 'User suspended successfully.' : 'User unsuspended successfully.'
+    ]);
+}
+
+
+
+
+
 public function ConvertStatus(Request $request, $id)
 {
     $request->validate([
@@ -136,6 +152,21 @@ public function ConvertStatus(Request $request, $id)
 
     return redirect()->back()->with('success', 'Convert Status updated successfully.');
 }
+
+
+public function SuspendUser(Request $request, $id)
+{
+    $request->validate([
+        'suspended' => 'required|in:0,1',
+    ]);
+
+    $user = User::findOrFail($id);
+    $user->suspended = $request->suspended;
+    $user->save();
+
+    return redirect()->back()->with('success', 'User suspended status updated successfully.');
+}
+
 
 
 
