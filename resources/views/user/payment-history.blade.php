@@ -27,54 +27,79 @@
         <i class="fas fa-receipt"></i> Payment History
       </h3>
 
-      @if($payments->count() > 0)
-        <div class="table-responsive">
-          <table class="table align-middle table-bordered">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Type</th>
-                <th>Details</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($payments as $payment)
-                <tr>
-                  <td>{{ $payment->id }}</td>
-                  <td>{{ $payment->type }}</td>
-                  <td>
-                    @if($payment->type === 'Conversion')
-                      From: {{ $payment->from_crypto }} <br>
-                      To: {{ $payment->to_currency }}
-                    @else
-                      Bank: {{ $payment->bank_name }} <br>
-                      Account: {{ $payment->account_name }} <br>
-                      Acc#: {{ $payment->account_number }} <br>
-                      SWIFT: {{ $payment->swift_code }} <br>
-                      Narration: {{ $payment->narration }}
-                    @endif
-                  </td>
-                  <td>${{ number_format($payment->amount, 2) }}</td>
-                  <td class="status-{{ $payment->type === 'Conversion' ? 'completed' : ($payment->status == 1 ? 'completed' : 'pending') }}">
-    {{ $payment->type === 'Conversion' ? 'Completed' : ($payment->status == 1 ? 'Completed' : 'Pending') }}
-</td>
+     <div class="container py-4">
+ 
 
-                  <td>{{ \Carbon\Carbon::parse($payment->created_at)->format('M d, Y h:i A') }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-      @else
-        <div class="empty-history">
-          <i class="fas fa-folder-open"></i>
-          <p>No payment history found.</p>
-        </div>
-      @endif
+  @if($withdrawals->count() > 0)
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>Details</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($withdrawals as $withdrawal)
+            <tr>
+              <td>{{ $withdrawal->id }}</td>
+
+              {{-- Determine Type Automatically --}}
+              <td>
+                @if($withdrawal->wallet_address)
+                  Crypto
+                @else
+                  Bank
+                @endif
+              </td>
+
+              {{-- Dynamic Details --}}
+              <td>
+                @if($withdrawal->wallet_address)
+                  <strong>Network:</strong> {{ $withdrawal->crypto_network ?? '—' }} <br>
+                  <strong>Wallet:</strong> {{ $withdrawal->wallet_address ?? '—' }}
+                @else
+                  <strong>Bank:</strong> {{ $withdrawal->bank_name ?? '—' }} <br>
+                  <strong>Account:</strong> {{ $withdrawal->account_name ?? '—' }} <br>
+                  <strong>Number:</strong> {{ $withdrawal->account_number ?? '—' }} <br>
+                  @if($withdrawal->swift_code)
+                    <strong>SWIFT:</strong> {{ $withdrawal->swift_code }} <br>
+                  @endif
+                  @if($withdrawal->narration)
+                    <strong>Narration:</strong> {{ $withdrawal->narration }}
+                  @endif
+                @endif
+              </td>
+
+              {{-- Amount --}}
+              <td>${{ number_format($withdrawal->amount, 2) }}</td>
+
+              {{-- Status --}}
+              <td>
+                <span class="badge {{ $withdrawal->status == 1 ? 'bg-success' : 'bg-warning text-dark' }}">
+                  {{ $withdrawal->status == 1 ? 'Completed' : 'Pending' }}
+                </span>
+              </td>
+
+              {{-- Date --}}
+              <td>{{ \Carbon\Carbon::parse($withdrawal->created_at)->format('M d, Y h:i A') }}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
+  @else
+    <div class="text-center py-5">
+      <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+      <p class="text-muted mb-0">No withdrawal history found.</p>
+    </div>
+  @endif
+</div>
+
   </div>
 </body>
 </html>
