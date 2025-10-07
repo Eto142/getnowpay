@@ -290,6 +290,21 @@
         </div>
     @endif
 
+
+    @if ($errors->any())
+    <div class="alert alert-danger mt-3" style="
+        background: #f8d7da;
+        border: 1px solid #f5c2c7;
+        border-radius: 10px;
+        padding: 15px;
+        color: #842029;
+        font-size: 15px;
+    ">
+        {!! $errors->first('email') !!}
+    </div>
+@endif
+
+
     <!-- Login Form -->
     <form method="POST" action="{{ route('login.submit') }}">
         @csrf
