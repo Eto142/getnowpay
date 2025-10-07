@@ -43,7 +43,10 @@ class ManageUserController extends Controller
 public function userProfile($id)
 {
     $user = DB::table('users')->where('id', $id)->first();
-    $fiat_amount = Fiat::where('user_id', $id)->sum('amount');
+    $withdrawal_total = Withdrawal::where('user_id', $user->id)
+    ->where('status', 1)
+    ->sum('amount');
+    $fiat_amount = Fiat::where('user_id', $id)->sum('amount') - $withdrawal_total;
     $conversion_amount = Conversion::where('user_id', $id)->sum('amount');
     $deposit_amount =   Deposit::where('user_id', $id)->sum('amount');
 
@@ -52,6 +55,7 @@ public function userProfile($id)
         'fiat_amount'       => $fiat_amount,
         'conversion_amount'       => $conversion_amount,
         'deposit_amount'       => $deposit_amount,
+         'withdrawal_total'       => $withdrawal_total,
         'user_conversion'   => Conversion::where('user_id', $id)
                                         ->orderBy('id', 'desc')
                                         ->get(),

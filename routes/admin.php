@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Admin\SendEmailController;
 use App\Http\Controllers\Admin\WalletController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\User\WithdrawalController;
+use App\Http\Controllers\Admin\WithdrawalController;
 use Illuminate\Support\Facades\Route;
 
 

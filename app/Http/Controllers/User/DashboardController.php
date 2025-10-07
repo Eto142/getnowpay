@@ -81,11 +81,17 @@ public function index()
 
     // Totals as before
     $deposit_total = Deposit::where('user_id', $user->id)->sum('amount');
+     $withdrawal_total = Withdrawal::where('user_id', $user->id)
+    ->where('status', 1)
+    ->sum('amount');
+
     $conversion_total = Conversion::where('user_id', $user->id)
                                   ->where('status', 1)
                                   ->sum('amount');
     $deposit_total = $deposit_total - $conversion_total;
-    $fiat_total = Fiat::where('user_id', $user->id)->sum('amount') + $conversion_total;
+    $fiat_total = Fiat::where('user_id', $user->id)->sum('amount')
+    + $conversion_total
+    - $withdrawal_total;
 
     // Fetch BTC ↔ USD rate (or your fiat currency)
     $btcRate = $this->getBtcRateInUsd();  // You’ll build this helper

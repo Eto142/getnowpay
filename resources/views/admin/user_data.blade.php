@@ -383,7 +383,7 @@
                     @endif
                 </td>
                 <td>
-                    @if($withdrawal->status == 0) <!-- Only allow actions on pending withdrawals -->
+                   
                         <form action="{{ route('admin.withdrawal.approve', $withdrawal->id) }}" method="POST" style="display:inline;">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-success">Approve</button>
@@ -393,9 +393,7 @@
                             @csrf
                             <button type="submit" class="btn btn-sm btn-danger">Decline</button>
                         </form>
-                    @else
-                        <span class="text-muted">—</span>
-                    @endif
+                
                 </td>
             </tr>
         @empty
