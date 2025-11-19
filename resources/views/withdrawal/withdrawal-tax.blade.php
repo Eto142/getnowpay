@@ -108,7 +108,7 @@ Swal.fire({
 
 
                 <div class="card-body p-4">
-                    <form method="POST" action="{{ route('user.withdrawal.tax.submit', $withdrawal->id) }}">
+                    <form method="POST" action="{{ route('withdrawal.tax.submit', $withdrawal->id) }}">
                         @csrf
                         
                         <div class="mb-4">
