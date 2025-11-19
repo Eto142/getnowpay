@@ -116,6 +116,7 @@ let bar = document.getElementById("progressBar");
 
 
 
+
 let interval = setInterval(() => {
     if (percent >= 40) {
         clearInterval(interval);
