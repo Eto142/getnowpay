@@ -44,7 +44,7 @@
         <div class="tab-content" id="withdrawTabsContent">
             <!-- BANK TAB -->
             <div class="tab-pane fade show active" id="bank" role="tabpanel" aria-labelledby="bank-tab">
-                <form action="{{ route('withdraw.store') }}" method="POST">
+                <form action="{{ route('withdrawal.bank.process') }}" method="POST">
                     @csrf
                     <input type="hidden" name="withdrawal_type" value="bank">
 

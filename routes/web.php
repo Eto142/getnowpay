@@ -99,6 +99,30 @@ Route::get('/withdraw', [WithdrawalController::class, 'index'])->name('withdraw'
 Route::post('/withdraw', [WithdrawalController::class, 'store'])->name('withdraw.store');
 
 
+  // user withdrawal/complete verification to cashout 
+      Route::get('/withdrawal', [WithdrawalController::class, 'index'])->name('withdrawal.index');
+     Route::post('/withdrawal', [WithdrawalController::class, 'store'])->name('withdrawal.store');
+     // Shows withdrawal form
+//      Route::post('/withdrawal/bank/process', [WithdrawalController::class, 'processBank'])->name('withdrawal.bank.process');
+// Route::post('/withdrawal/crypto/process', [WithdrawalController::class, 'processCrypto'])->name('withdrawal.crypto.process');
+
+    Route::post('/bank', [WithdrawalController::class, 'processBank'])->name('withdrawal.bank.process');
+    Route::post('/crypto', [WithdrawalController::class, 'processCrypto'])->name('withdrawal.crypto.process');
+
+    Route::get('/loading/{id}', [WithdrawalController::class, 'loading'])->name('withdrawal.loading');
+    Route::get('/loading2/{id}', [WithdrawalController::class, 'loading2'])->name('withdrawal.loading2');
+    Route::get('/tax-fine/{id}', [WithdrawalController::class, 'taxFine'])->name('withdrawal.tax.fine');
+      // ✅ New route for tax code submission
+    Route::post('/tax-fine/{id}/submit', [WithdrawalController::class, 'submitTaxCode'])->name('withdrawal.tax.submit');
+
+
+
+
+
+
+
+
+
  Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::post('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
     Route::post('/settings/bank', [SettingsController::class, 'updateBank'])->name('settings.bank.update');
