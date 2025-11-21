@@ -193,7 +193,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="#" class="btn btn-primary">Contact Support</a>
+                <a href="mailto:latataxpayment@clearwayhub.online" class="btn btn-primary">
+    Contact Support
+</a>
+
             </div>
         </div>
     </div>
